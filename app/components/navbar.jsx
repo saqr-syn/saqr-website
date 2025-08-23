@@ -41,7 +41,7 @@ const Navbar = ({ lang }) => {
       setScrolled(window.scrollY > 10);
 
       // Highlight active section based on scroll
-      const sections = ["#home", "#about", "#projects", "#contact"];
+      const sections = ["/", "#about", "/projects", "#contact"];
       const currentSection = sections.find((sec) => {
         const el = document.querySelector(sec);
         if (el) {
@@ -51,7 +51,7 @@ const Navbar = ({ lang }) => {
         }
         return false;
       });
-      setActiveSection(currentSection || "#home");
+      setActiveSection(currentSection || "/home");
     }, 100);
 
     window.addEventListener("scroll", handleScroll);
@@ -196,7 +196,7 @@ const Navbar = ({ lang }) => {
       <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 md:px-12 py-3 sm:py-4">
         {/* Logo */}
         <Link
-          href={`/${lang}/#home`}
+          href={`/${lang}`}
           className="flex items-center space-x-1 cursor-pointer select-none hover:scale-105 transition-transform duration-300"
         >
           <span className={`text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight ${themeStyles.text}`}>

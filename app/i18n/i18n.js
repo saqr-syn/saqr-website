@@ -8,7 +8,6 @@ import { getOptions, fallbackLng } from "./settings";
 import ar from "./ar.json";
 import en from "./en.json";
 
-// لو مش معمول initialize قبل كده
 if (!i18n.isInitialized) {
   i18n
     .use(initReactI18next)
@@ -20,10 +19,11 @@ if (!i18n.isInitialized) {
         en: { translation: en },
       },
       detection: {
-        order: ["path", "cookie", "htmlTag"],
-        caches: ["cookie"],
+        order: ["path"],
+        caches: [],
       },
     });
 }
+
 
 export default i18n;

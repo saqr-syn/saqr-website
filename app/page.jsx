@@ -1,3 +1,4 @@
+// HomePage.js
 "use client";
 
 import Hero from "./components/hero";
@@ -7,13 +8,18 @@ import Testimonials from "./components/testimonials";
 import Contact from "./components/contects";
 import Footer from "./components/footer";
 
-export default function HomePage() {
+// لازم تستقبل الـ"params" هنا
+export default function HomePage({ params }) {
+
+    // وهنا تاخد منها الـ"lang"
+    const { lang } = params;
 
     return (
         <div className="bg-[#0a0e1a] text-white min-h-screen flex flex-col">
             <Hero />
             <About />
-            <Projects />
+            {/* كده الـ"lang" هتوصل صح للـ"Projects" */}
+            <Projects params={{ lang }} />
             <Testimonials />
             <Contact />
             <Footer />
