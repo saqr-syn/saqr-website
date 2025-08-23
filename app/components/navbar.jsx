@@ -1,6 +1,7 @@
+// app/components/navbar.jsx
 "use client";
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useState, useEffect, useMemo, useCallback } from "react";
@@ -23,7 +24,6 @@ const Navbar = ({ lang }) => {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const { theme, setTheme } = useTheme();
 
   // Current language from i18n
@@ -58,8 +58,10 @@ const Navbar = ({ lang }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => setIsOpen(false), [pathname, searchParams]);
+  // Close mobile menu on route change (depends on pathname only)
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   // ----------------------------------------------------
   // 3- Language Switching Logic
