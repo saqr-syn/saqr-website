@@ -1,4 +1,4 @@
-"use client";
+
 
 import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
@@ -20,7 +20,7 @@ export default function Projects({ params }) {
   const { theme } = useTheme();
 
   // فك الـ params Promise
-  const { lang } = React.use(params); 
+  const { lang } = params;
 
   const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState("");
@@ -46,7 +46,7 @@ export default function Projects({ params }) {
 
   return (
     <div className={`min-h-screen pt-28 px-6 md:px-12 pb-20 ${theme === "dark" ? "bg-black text-gray-300" : "bg-gray-100 text-gray-900"}`}>
-      
+
       {/* عنوان الصفحة */}
       <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center text-[#a454ff]">
         {lang === "ar" ? "المشروعات" : "Projects"}
@@ -71,7 +71,7 @@ export default function Projects({ params }) {
               key={option}
               onClick={() => setTypeFilter(option)}
               className={`px-5 py-2 rounded-2xl font-semibold transition-colors duration-300 shadow-md
-                ${theme === "dark" 
+                ${theme === "dark"
                   ? (typeFilter === option ? "bg-[#a454ff] text-white hover:bg-[#8b36ff]" : "bg-gray-800 text-gray-300 hover:bg-gray-700")
                   : (typeFilter === option ? "bg-[#a454ff] text-white hover:bg-[#8b36ff]" : "bg-white text-gray-900 hover:bg-gray-100")
                 }`}
@@ -89,8 +89,8 @@ export default function Projects({ params }) {
             key={project.slug}
             whileHover={{ scale: 1.03 }}
             className={`cursor-pointer rounded-3xl overflow-hidden relative transition-transform duration-300
-                        ${theme === "dark" ? "shadow-[0_8px_20px_rgba(0,0,0,0.6)] bg-gray-800 hover:shadow-[0_12px_25px_rgba(0,0,0,0.8)]" 
-                                           : "shadow-xl bg-white hover:shadow-2xl"}`}
+                        ${theme === "dark" ? "shadow-[0_8px_20px_rgba(0,0,0,0.6)] bg-gray-800 hover:shadow-[0_12px_25px_rgba(0,0,0,0.8)]"
+                : "shadow-xl bg-white hover:shadow-2xl"}`}
             onClick={() => router.push(`/${lang}/projects/${project.slug}`)}
           >
             <img

@@ -1,3 +1,4 @@
+"use client";
 // app/[lang]/page.js (server component)
 import Hero from "../components/hero";
 import About from "../components/about";
