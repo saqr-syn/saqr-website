@@ -1,7 +1,7 @@
 // app/[lang]/projects/ProjectsClient.jsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -17,32 +17,38 @@ const projectsArray = Object.values(projectData).map(p => ({
   image: p.screenshotHero
 }));
 
-export default function ProjectsClient({ params }) {
+export default function ProjectsClient({ params = {}, searchParams = {} }) {
   const router = useRouter();
   const { theme } = useTheme();
-  const { lang } = params || { lang: "en" };
+  const { lang = "en" } = params;
+
+  // label لـ "All" حسب اللغة حتى لا يحدث انقسام بالفلتر
+  const ALL_LABEL = lang === "ar" ? "الكل" : "All";
 
   const [mounted, setMounted] = useState(false);
-  const [search, setSearch] = useState("");
-  const [typeFilter, setTypeFilter] = useState("All");
+  const [search, setSearch] = useState(() => (searchParams.q ? String(searchParams.q) : ""));
+  const [typeFilter, setTypeFilter] = useState(ALL_LABEL);
   const [filteredProjects, setFilteredProjects] = useState(projectsArray);
 
   useEffect(() => setMounted(true), []);
 
+  // احسب خيارات النوع محليًا
+  const typeOptions = useMemo(() => {
+    return [ALL_LABEL, ...Array.from(new Set(projectsArray.map(p => p.type[lang])))];
+  }, [lang, ALL_LABEL]);
+
   useEffect(() => {
-    const searchLower = search.toLowerCase();
+    const searchLower = (search || "").toLowerCase();
     const filtered = projectsArray.filter(p => {
       const nameMatch = p.name.toLowerCase().includes(searchLower);
       const typeMatch = p.type[lang].toLowerCase().includes(searchLower);
-      const typeFilterMatch = typeFilter === "All" || p.type[lang] === typeFilter;
+      const typeFilterMatch = typeFilter === ALL_LABEL || p.type[lang] === typeFilter;
       return (nameMatch || typeMatch) && typeFilterMatch;
     });
     setFilteredProjects(filtered);
-  }, [search, typeFilter, lang]);
+  }, [search, typeFilter, lang, ALL_LABEL]);
 
-  if (!mounted) return null;
-
-  const typeOptions = ["All", ...new Set(projectsArray.map(p => p.type[lang]))];
+  if (!mounted) return null; // يحمي تعارضات SSR/CSR مع next-themes
 
   return (
     <div className={`min-h-screen pt-28 px-6 md:px-12 pb-20 ${theme === "dark" ? "bg-black text-gray-300" : "bg-gray-100 text-gray-900"}`}>
@@ -87,7 +93,6 @@ export default function ProjectsClient({ params }) {
                 : "shadow-xl bg-white hover:shadow-2xl"}`}
             onClick={() => router.push(`/${lang}/projects/${project.slug}`)}
           >
-            {/* use next/image with fill for responsive cover */}
             <div className="relative w-full h-56 md:h-64">
               {project.image ? (
                 <Image
