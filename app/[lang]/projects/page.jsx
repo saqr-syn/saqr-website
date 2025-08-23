@@ -1,6 +1,6 @@
 
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
