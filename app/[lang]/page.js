@@ -1,4 +1,7 @@
+
 // app/[lang]/page.js
+
+"use client"
 // بنستورد الـ 'use' Hook الجديد من 'react'
 import { use } from 'react';
 import Navbar from '../components/navbar';
@@ -7,6 +10,7 @@ import About from '../components/about';
 import Projects from '../components/projects';
 import Contact from '../components/contects';
 import Footer from '../components/footer';
+import Testimonials from '../components/testimonials';
 
 // ده الكود الجديد اللي لازم تعتمد عليه
 export default function HomePage({ params }) {
