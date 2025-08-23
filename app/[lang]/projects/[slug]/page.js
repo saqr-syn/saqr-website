@@ -2,7 +2,7 @@
 
 // استيراد المكتبات الضرورية
 // Importing necessary libraries
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import projectData from "@/data/fake_data";
@@ -36,7 +36,7 @@ const staggerItem = {
 const ProjectDetail = ({ params }) => {
   // استخدام React.use() لفك الـ Promise من params لحل المشكلة
   // Using React.use() to unwrap the params Promise to fix the issue.
-  const { slug, lang } = React.use(params);
+  const { slug, lang } = params;
   const router = useRouter();
   const { theme, systemTheme } = useTheme();
 
@@ -76,7 +76,7 @@ const ProjectDetail = ({ params }) => {
       </div>
     );
   }
-  
+
   // تحديد الثيم الحالي (ليلي أو نهاري)
   // Determining the current theme (light or dark).
   const currentTheme = theme === "system" ? systemTheme : theme;
@@ -90,23 +90,23 @@ const ProjectDetail = ({ params }) => {
   const mainButtonClass = isDark
     ? "bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:from-fuchsia-600 hover:to-cyan-600"
     : "bg-gradient-to-r from-pink-500 to-cyan-500 hover:from-pink-600 hover:to-cyan-600";
-  
+
   const secondaryButtonClass = isDark
     ? "border-cyan-500 hover:border-cyan-600 text-cyan-500 hover:text-cyan-600"
     : "border-pink-500 hover:border-pink-600 text-pink-500 hover:text-pink-600";
-    
+
   // تم تعديل ظلال الكاردز لتناسب الثيم
   // Card shadows have been adjusted to suit the theme
   const cardShadowClass = isDark
     ? "shadow-[0_5px_15px_rgba(0,0,0,0.2),0_10px_20px_rgba(0,0,0,0.15),0_15px_30px_rgba(0,0,0,0.1)]"
     : "shadow-[0_5px_15px_rgba(0,0,0,0.15),0_10px_20px_rgba(0,0,0,0.1),0_15px_30px_rgba(0,0,0,0.05)]";
-    
+
   // الألوان الأساسية للخلفيات والنصوص حسب الثيم
   // Core colors for backgrounds and text based on the theme
   const bgColor = isDark ? "bg-black" : "bg-gray-100"; // رجعت bg-gray-100
   const textColor = isDark ? "text-gray-200" : "text-gray-900";
   const subTextColor = isDark ? "text-gray-400" : "text-gray-700";
-  const cardBg = isDark ? "bg-[#1a1635]" : "bg-white"; 
+  const cardBg = isDark ? "bg-[#1a1635]" : "bg-white";
   const badgeBg = isDark ? "bg-[#0a0e1a]" : "bg-[#f0f0f0]"; // رجعت bg-[#f0f0f0]
   const badgeText = isDark ? "text-gray-200" : "text-gray-900";
   const badgeBorder = isDark ? "border-[#a454ff]/40" : "border-[#a454ff]/40"; // رجعت border-[#a454ff]/40
@@ -115,13 +115,13 @@ const ProjectDetail = ({ params }) => {
 
 
   return (
-    <motion.div 
+    <motion.div
       className={`min-h-screen pt-24 px-6 md:px-12 pb-20 ${bgColor} transition-colors duration-500 ${textColor}`}
       initial="hidden"
       animate="show"
       variants={{ show: { transition: { staggerChildren: 0.1 } } }}
     >
-      
+
       {/* Header - يتضمن زر الرجوع والمعلومات الأساسية */}
       {/* Header - includes the back button and basic info. */}
       <motion.div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6" variants={staggerItem}>
@@ -267,8 +267,8 @@ const ProjectDetail = ({ params }) => {
               <div><span className={`font-bold ${titleColor}`}>{lang === "ar" ? "الفريق" : "Team"}: </span><span className={`${subTextColor}`}>{project.teamSize}</span></div>
               <div className="flex gap-2 flex-wrap mt-3">
                 {(project.tags || []).map(t => (
-                  <motion.span 
-                    key={t} 
+                  <motion.span
+                    key={t}
                     className={`px-3 py-1 rounded-full text-xs border ${isDark ? "border-sky-300/40" : "border-purple-300/40"} ${badgeBg} ${badgeText} transition-colors duration-500`}
                     whileHover={{ scale: 1.1, boxShadow: isDark ? "0 0 8px rgba(129,230,217,0.5)" : "0 0 8px rgba(155,89,182,0.5)" }}
                     transition={{ duration: 0.3 }}
@@ -304,33 +304,33 @@ const ProjectDetail = ({ params }) => {
           {/* Project Links. */}
           <div className={`p-6 ${cardBg} rounded-3xl ${cardShadowClass} flex flex-col gap-4 transition-colors duration-500`}>
             {project.website && (
-              <motion.a 
-                href={project.website} 
-                target="_blank" 
-                rel="noreferrer" 
-                whileTap={{ scale: 0.95 }} 
+              <motion.a
+                href={project.website}
+                target="_blank"
+                rel="noreferrer"
+                whileTap={{ scale: 0.95 }}
                 className={`px-5 py-3 rounded-2xl text-center font-bold text-white ${mainButtonClass} transition-all duration-300 transform-gpu hover:scale-[1.02]`}
               >
                 {lang === "ar" ? "الموقع الرسمي" : "Website"}
               </motion.a>
             )}
             {project.github && (
-              <motion.a 
-                href={project.github} 
-                target="_blank" 
-                rel="noreferrer" 
-                whileTap={{ scale: 0.95 }} 
+              <motion.a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                whileTap={{ scale: 0.95 }}
                 className={`px-5 py-3 rounded-2xl text-center font-bold border ${secondaryButtonClass} transition-all duration-300 transform-gpu hover:scale-[1.02]`}
               >
                 GitHub
               </motion.a>
             )}
             {project.mobileDownload && (
-              <motion.a 
-                href={project.mobileDownload} 
-                target="_blank" 
-                rel="noreferrer" 
-                whileTap={{ scale: 0.95 }} 
+              <motion.a
+                href={project.mobileDownload}
+                target="_blank"
+                rel="noreferrer"
+                whileTap={{ scale: 0.95 }}
                 className={`px-5 py-3 rounded-2xl bg-green-600 hover:bg-green-700 text-white text-center font-bold transition-all duration-300 transform-gpu hover:scale-[1.02]`}
               >
                 {lang === "ar" ? "تحميل التطبيق" : "Download App"}
