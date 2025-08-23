@@ -1,12 +1,14 @@
-
+// app/[lang]/projects/ProjectsClient.jsx
 "use client";
+
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import projectData from "@/data/fake_data";  // عدل المسار حسب مكان الملف
+import Image from "next/image";
+import projectData from "@/data/fake_data"; // تأكد من المسار
 
-// تحويل object لمصفوفة لتسهيل الفلترة والعرض
+// تحويل object لمصفوفة لتسهيل العرض
 const projectsArray = Object.values(projectData).map(p => ({
   slug: p.slug,
   name: p.name,
@@ -15,12 +17,10 @@ const projectsArray = Object.values(projectData).map(p => ({
   image: p.screenshotHero
 }));
 
-export default function Projects({ params }) {
+export default function ProjectsClient({ params }) {
   const router = useRouter();
   const { theme } = useTheme();
-
-  // فك الـ params Promise
-  const { lang } = params;
+  const { lang } = params || { lang: "en" };
 
   const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState("");
@@ -46,25 +46,20 @@ export default function Projects({ params }) {
 
   return (
     <div className={`min-h-screen pt-28 px-6 md:px-12 pb-20 ${theme === "dark" ? "bg-black text-gray-300" : "bg-gray-100 text-gray-900"}`}>
-
-      {/* عنوان الصفحة */}
       <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center text-[#a454ff]">
         {lang === "ar" ? "المشروعات" : "Projects"}
       </h1>
 
-      {/* البحث + فلترة كاردات */}
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10 items-center">
         <input
           type="text"
           placeholder={lang === "ar" ? "ابحث بالاسم أو النوع..." : "Search by name or type..."}
-          className={`px-5 py-3 rounded-2xl w-full max-w-md border focus:outline-none focus:ring-2 focus:ring-[#a454ff] 
-                      shadow-md transition-colors duration-300
-                      ${theme === "dark" ? "dark:bg-gray-800 dark:text-white dark:border-gray-600" : "bg-white text-gray-900 border-gray-300"}`}
+          className={`px-5 py-3 rounded-2xl w-full max-w-md border focus:outline-none focus:ring-2 focus:ring-[#a454ff] shadow-md transition-colors duration-300
+            ${theme === "dark" ? "dark:bg-gray-800 dark:text-white dark:border-gray-600" : "bg-white text-gray-900 border-gray-300"}`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        {/* فلترة نوع المشروع بأزرار */}
         <div className="flex gap-2">
           {typeOptions.map(option => (
             <button
@@ -82,22 +77,31 @@ export default function Projects({ params }) {
         </div>
       </div>
 
-      {/* شبكة المشاريع */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProjects.map(project => (
           <motion.div
             key={project.slug}
             whileHover={{ scale: 1.03 }}
             className={`cursor-pointer rounded-3xl overflow-hidden relative transition-transform duration-300
-                        ${theme === "dark" ? "shadow-[0_8px_20px_rgba(0,0,0,0.6)] bg-gray-800 hover:shadow-[0_12px_25px_rgba(0,0,0,0.8)]"
+                      ${theme === "dark" ? "shadow-[0_8px_20px_rgba(0,0,0,0.6)] bg-gray-800 hover:shadow-[0_12px_25px_rgba(0,0,0,0.8)]"
                 : "shadow-xl bg-white hover:shadow-2xl"}`}
             onClick={() => router.push(`/${lang}/projects/${project.slug}`)}
           >
-            <img
-              src={project.image}
-              alt={project.name}
-              className="w-full h-56 md:h-64 object-cover"
-            />
+            {/* use next/image with fill for responsive cover */}
+            <div className="relative w-full h-56 md:h-64">
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  priority={false}
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-200 dark:bg-gray-700" />
+              )}
+            </div>
 
             <div className={`absolute top-4 right-4 px-4 py-1 rounded-full font-semibold text-sm 
               ${project.type.en === "Mobile" ? "bg-green-500 text-white" : "bg-blue-500 text-white"}`}>
