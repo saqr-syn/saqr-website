@@ -1,4 +1,3 @@
-// src/utils/admin/AddNewProject.ts
 import { db } from "@/utils/firebase";
 import {
   doc,
@@ -9,62 +8,14 @@ import {
   DocumentReference,
 } from "firebase/firestore";
 
-// --- ProjectPayload متوافق مع ProjectData من الواجهة ---
-export interface ProjectPayload {
-  id?: string;
-  slug?: string;
+import { ProjectData } from "@/data/types"; // ✅ نستخدم الـ interface الأساسي
 
-  // --- المعلومات الأساسية ---
-  name: string;
-  short?: string;
-  description?: string;
-
-  // --- المطور والفريق ---
-  developer?: string;
-  developerRole?: string;
-  teamSize?: number;
-  vision?: string;
-
-  // --- أدوات وتقنيات ---
-  tools?: string[];
-
-  // --- الصور والفيديو ---
-  screenshotHero?: string;
-  screenshots?: string[];
-  video?: string;
-
-  // --- الحالة والنوع والسعر ---
-  status?: "active" | "inactive" | "archived";
-  type?: "web" | "mobile";
-  paid?: boolean;
-  price?: number;
-  links: { website: string };
-
-  // --- الوسوم ---
-  tags?: string[];
-
-  // --- التحديات والحلول والمميزات ---
-  challenges?: string[];
-  solutions?: string[];
-  features?: string[];
-
-  // --- مراحل المشروع ---
-  stages?: Array<{
-    title: string;
-    desc: string;
-    done: boolean;
-    date?: string;
-    eta?: string;
-  }>;
-
-  // --- بيانات إضافية مستقبلية ---
-  extraMetadata?: Record<string, any>;
-
-  // --- مالك المشروع وتطبيقات مميزة ---
+// --- ProjectPayload للـ backend، متوافق مع ProjectData ---
+export interface ProjectPayload extends Partial<ProjectData> {
+  // --- بيانات إضافية للـ backend فقط ---
+  extraMetadata?: Record<string, string | number | boolean | null>;
   ownerId?: string;
   featuredApps?: string[];
-
-  [key: string]: any; // لأي بيانات إضافية مستقبلية
 }
 
 // --- validate URLs ---
@@ -78,14 +29,17 @@ function normalizePayload(input: ProjectPayload): ProjectPayload {
   const payload: ProjectPayload = { ...input };
 
   // تحويل أي arrays من نصوص لفهرس
-  ["tools", "screenshots", "tags", "challenges", "solutions", "features"].forEach((key) => {
-    if (payload[key] && !Array.isArray(payload[key])) {
-      payload[key] = String(payload[key])
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean);
+  (["tools", "screenshots", "tags", "challenges", "solutions", "features"] as const).forEach(
+    (key) => {
+      const value = payload[key];
+      if (value && !Array.isArray(value)) {
+        payload[key] = String(value)
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+      }
     }
-  });
+  );
 
   // تحقق من paid و price
   if (typeof payload.paid !== "boolean") payload.paid = Boolean(payload.paid);

@@ -40,9 +40,9 @@ export interface ProjectData {
     date?: string;
     eta?: string;
   }>;
-  extraMetadata?: Record<string, any> & { views?: number };
-  createdAt?: any;
-  updatedAt?: any;
+  extraMetadata?: Record<string, string | number | boolean | null> & { views?: number };
+  createdAt?: Date;        // Firestore timestamp يتحول Date
+  updatedAt?: Date;        // نفس الفكرة
 }
 
 // --- بيانات الكومنت الواحد ---
@@ -54,7 +54,7 @@ export interface CommentData {
   userName: string;      // اسم اليوزر
   userPhoto?: string;    // صورة البروفايل
   comment: string;       // نص الكومنت
-  createdAt: any;        // Firestore timestamp
+  createdAt: Date;       // Firestore timestamp كـ Date
 }
 
 // --- لو عايزين نعرض مشروع + كومنتاته مع بعض ---
