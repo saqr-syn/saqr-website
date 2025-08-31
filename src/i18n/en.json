@@ -1,0 +1,204 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Mostafa Saqr: Where Ideas Become Reality",
+    "subtitle": "We design integrated software solutions and transform ideas into exceptional user experiences.",
+    "cta": "Explore My Projects",
+    "cta_contact": "Contact for a Consultation",
+    "alt_image": "Abstract design representing data security"
+  },
+  "about": {
+    "title": "About",
+    "titleHighlight": "Me",
+    "name": "Mostafa Saqr",
+    "intro": "I am",
+    "descriptionHighlight": "I craft",
+    "descriptionEmphasis": "smart, powerful, and secure applications",
+    "missionStart": "My Mission:",
+    "missionHighlight": "Bridging Creativity and Technology",
+    "missionEnd": "to create inspiring products.",
+    "skills": [
+      "Flutter",
+      "Next.js",
+      "Firebase",
+      "Tailwind CSS",
+      "Smart Engineering"
+    ],
+    "imageAlt": "An illustration about me"
+  },
+  "projects": {
+    "title": "My Projects",
+    "titleHighlight": "Featured",
+    "button": "View Project"
+  },
+  "testimonials": {
+    "title": "Client",
+    "highlight": "Testimonials"
+  },
+  "contact": {
+    "title1": "Let's",
+    "title2": "build",
+    "intro": "Do you have a project idea or want to collaborate? Always open for discussions, collaborations, or new opportunities.",
+    "name": "Your Name",
+    "namePlaceholder": "Type your name here",
+    "email": "Your Email",
+    "emailPlaceholder": "Type your email",
+    "message": "Your Message",
+    "messagePlaceholder": "Type your message here...",
+    "send": "Send Message"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "motto": "Shaping the future, one smart idea at a time.",
+    "name": "Mostafa Saqr"
+  },
+  "auth": {
+    "checking": "Checking Authentication...",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit"
+  },
+  "visitorCounter": {
+    "visitors": "Total Visitors"
+  },
+  "themes": {
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "system": "System Default"
+  },
+  "language": {
+    "select": "Select Language",
+    "en": "English",
+    "ar": "Arabic"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "minLength": "Minimum length is {{length}} characters"
+  },
+  "success": {
+    "messageSent": "Your message has been sent successfully!"
+  },
+  "loading": "Loading...",
+  "notFound": {
+    "title": "404 - Page Not Found",
+    "message": "Sorry, the page you are looking for does not exist.",
+    "home": "Go Back Home"
+  },
+  "title": {
+    "Projects": "Projects",
+    "Mail": "Mail",
+    "Dashboard": "Dashboard",
+    "Account": "Account",
+    "New_project": "New Project",
+    "Settings": "Settings"
+  },
+  "AdminProjectsPage": {
+    "title": "My",
+    "highlight": "Projects",
+    "description": "Explore my recent work and side projects 🚀",
+    "AddButton": "+ Add Project",
+    "EditButton": "Edit",
+    "DeleteButton": "Delete"
+  },
+  "newProjectPage": {
+    "addNewProject": "Add New Project",
+    "description": "Create a new project—add details, images, and links. Also, select the featured applications.",
+    "backToProjects": "Back to Projects",
+    "projectName": "Project Name",
+    "projectNamePlaceholder": "Enter project name",
+    "slugProject": "Slug (URL)",
+    "shortDescription": "Short Description",
+    "shortDescriptionPlaceholder": "A smart and secure chat app...",
+    "fullDescription": "Full Description",
+    "fullDescriptionPlaceholder": "A detailed description of the project...",
+    "developer": "Developer",
+    "developerPlaceholder": "Mostafa Saqr",
+    "tools": "Tools (comma separated)",
+    "toolsPlaceholder": "Flutter, Firebase, AI",
+    "year": "Year",
+    "status": "Status",
+    "statusOptions": {
+      "Draft": "Draft",
+      "Active-MVPLaunched": "Active - MVP Launched",
+      "Maintenance": "Maintenance",
+      "Archived": "Archived"
+    },
+    "paid": "Paid",
+    "free": "Free",
+    "paidLabel": "Paid",
+    "price": "Price (USD)",
+    "website": "Website / Download",
+    "github": "GitHub / Repo",
+    "tags": "Tags",
+    "tagsPlaceholder": "Write a tag and press Enter or , to add it",
+    "add": "Add",
+    "heroScreenshot": "Hero Screenshot",
+    "dragAndDrop": "Drag & Drop or Click to Upload",
+    "screenshots": "Screenshots (comma separated URLs)",
+    "featuredApps": "Featured Apps (max 3)",
+    "selected": "Selected",
+    "select": "Select",
+    "actions": "Actions",
+    "saving": "Saving...",
+    "saveProject": "Save Project",
+    "cancel": "Cancel",
+    "validationError": "Name, short description, and hero screenshot are required.",
+    "successMessage": "✅ Project prepared successfully. Next step: Upload to Firebase Firestore.",
+    "errorMessage": "❌ An error occurred while saving. Check the console."
+  },
+  "projectDetail": {
+    "loading": "Loading",
+    "notFound": "Project not found",
+    "developer": "Developer",
+    "status": "Status",
+    "year": "Year",
+    "price": "Price",
+    "free": "Free",
+    "github": "GitHub",
+    "viewCode": "View Code",
+    "website": "Website",
+    "visitWebsite": "Visit Website",
+    "tags": "Tags",
+    "tools": "Tools",
+    "screenshots": "Screenshots",
+    "back": "Back"
+  },
+  "editProject": {
+    "loading": "Loading",
+    "notFound": "Project not found",
+    "title": "Edit Project",
+    "name": "Project Name",
+    "shortDescription": "Short Description",
+    "fullDescription": "Full Description",
+    "heroImage": "Hero Image URL",
+    "screenshots": "Project Screenshots",
+    "price": "Price",
+    "paid": "Paid",
+    "paidOption": "Paid",
+    "freeOption": "Free",
+    "status": "Status",
+    "type": "Project Type",
+    "developer": "Developer / Team",
+    "tools": "Tools / Technologies",
+    "tags": "Tags / Keywords",
+    "website": "Website URL",
+    "video": "Video URL",
+    "vision": "Project Vision",
+    "features": "Features",
+    "challenges": "Challenges",
+    "solutions": "Solutions",
+    "stages": "Project Stages",
+    "teamSize": "Team Size",
+    "extraMetadata": "Extra Metadata",
+    "save": "Save Changes"
+  }
+}
